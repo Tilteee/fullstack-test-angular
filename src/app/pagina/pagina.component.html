@@ -5,7 +5,35 @@
   // TODO: adicionar um input e um botão à página
   // TODO: criar um método POST no api.service que envie o texto do input e exiba a resposta na página
 -->
-
-<h1>Título da página</h1>
-
-{{ apiGreeting }}
+<div class="loader" *ngIf="isGettingApiData$ | async; else showBody">
+</div>
+<ng-template #showBody>
+  <body>
+    <header>
+      <h1>Título da página</h1>
+    </header>
+    <div class="content">
+      <div class="sidebar">
+        <div class="sidebar-content">
+          <span>SIDEBAR</span>
+          <a
+            routerLink="/"
+            title="voltar para a página inicial do angular"
+            class="route-link">
+              START
+          </a>
+        </div>
+      </div>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+        <span>{{apiGreeting}}</span>
+        <span>{{nowTime}}</span>
+        <form class="form" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+          <input type='text' class="input-text" formControlName="text">
+          <input type="submit" class="input-button" value="Enviar">
+        </form>
+        <span *ngIf="text">{{text}}</span>
+      </div>
+    </div>
+  </body>
+</ng-template>

@@ -16,4 +16,11 @@ export class ApiService {
     return this.http.get(environment.apiHost + '/hello');
   }
 
+  public getNow(): Observable<any> {
+    return this.http.get(environment.apiHost + '/nowTime');
+  }
+
+  public sendText(text: string): Observable<any> {
+    return this.http.post(environment.apiHost + '/sendText' , text);
+  }
 }
